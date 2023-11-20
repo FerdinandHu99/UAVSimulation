@@ -37,32 +37,32 @@ namespace airlib
         struct Params
         {
             /*********** required parameters ***********/
-            uint rotor_count;
-            vector<RotorPose> rotor_poses;
-            real_T mass;
-            Matrix3x3r inertia;
-            Vector3r body_box;
+            uint rotor_count; // 转子数量
+            vector<RotorPose> rotor_poses; // 转子位姿
+            real_T mass; // 重量
+            Matrix3x3r inertia; // 惯性
+            Vector3r body_box; // 机身尺寸
 
             /*********** optional parameters with defaults ***********/
-            real_T linear_drag_coefficient = 1.3f / 4.0f;
+            real_T linear_drag_coefficient = 1.3f / 4.0f; // 线性阻力系数
             //sample value 1.3 from http://klsin.bpmsg.com/how-fast-can-a-quadcopter-fly/, but divided by 4 to account
             // for nice streamlined frame design and allow higher top speed which is more fun.
             //angular coefficient is usually 10X smaller than linear, however we should replace this with exact number
             //http://physics.stackexchange.com/q/304742/14061
-            real_T angular_drag_coefficient = linear_drag_coefficient;
-            real_T restitution = 0.55f; // value of 1 would result in perfectly elastic collisions, 0 would be completely inelastic.
-            real_T friction = 0.5f;
-            RotorParams rotor_params;
+            real_T angular_drag_coefficient = linear_drag_coefficient; // 角阻力系数
+            real_T restitution = 0.55f; // 恢复系数value of 1 would result in perfectly elastic collisions(完全弹性碰撞), 0 would be completely inelastic(完全非弹性碰撞).
+            real_T friction = 0.5f; // 摩擦系数
+            RotorParams rotor_params; // 转子参数
         };
 
-    protected: //must override by derived class
+    protected: //must override by derived class 纯虚函数
         virtual void setupParams() = 0;
         virtual const SensorFactory* getSensorFactory() const = 0;
 
     public: //interface
         virtual std::unique_ptr<MultirotorApiBase> createMultirotorApi() = 0;
 
-        virtual ~MultiRotorParams() = default;
+        virtual ~MultiRotorParams() = default; // 指示编译器生成默认的析构函数
         virtual void initialize(const AirSimSettings::VehicleSetting* vehicle_setting)
         {
             sensor_storage_.clear();

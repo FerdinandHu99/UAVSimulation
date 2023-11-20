@@ -34,12 +34,12 @@ namespace airlib
             We use values for GWS 9X5 propeller for which,
             C_T = 0.109919, C_P = 0.040164 @ 6396.667 RPM
             */
-        real_T C_T = 0.109919f; // the thrust co-efficient @ 6396.667 RPM, measured by UIUC.
-        real_T C_P = 0.040164f; // the torque co-efficient at @ 6396.667 RPM, measured by UIUC.
-        real_T air_density = 1.225f; //  kg/m^3
-        real_T max_rpm = 6396.667f; // revolutions per minute
-        real_T propeller_diameter = 0.2286f; //diameter in meters, default is for DJI Phantom 2
-        real_T propeller_height = 1 / 100.0f; //height of cylindrical area when propeller rotates, 1 cm
+        real_T C_T = 0.109919f; // the thrust co-efficient @ 6396.667 RPM, measured by UIUC. 推力系数
+        real_T C_P = 0.040164f; // the torque co-efficient at @ 6396.667 RPM, measured by UIUC. 扭矩系数
+        real_T air_density = 1.225f; //  kg/m^3 空气密度
+        real_T max_rpm = 6396.667f; // revolutions per minute 最大转速
+        real_T propeller_diameter = 0.2286f; //diameter in meters, default is for DJI Phantom 2 螺旋桨直径
+        real_T propeller_height = 1 / 100.0f; //height of cylindrical area when propeller rotates, 1 cm 螺旋桨高度
         real_T control_signal_filter_tc = 0.005f; //time constant for low pass filter
 
         real_T revolutions_per_second;

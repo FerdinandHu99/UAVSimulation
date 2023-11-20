@@ -22,14 +22,14 @@ void ASimHUD::BeginPlay()
 
     try {
         UAirBlueprintLib::OnBeginPlay();
-        initializeSettings();
-        loadLevel();
+        initializeSettings(); // 初始化settings.json文件
+        loadLevel(); // 加载当前地图
 
         // Prevent a MavLink connection being established if changing levels
         if (map_changed_) return;
 
         setUnrealEngineSettings();
-        createSimMode();
+        createSimMode(); // 创建仿真模式（多旋翼/车）
         createMainWidget();
         setupInputBindings();
         if (simmode_)
@@ -97,7 +97,7 @@ void ASimHUD::inputEventToggleTrace()
 void ASimHUD::updateWidgetSubwindowVisibility()
 {
     for (int window_index = 0; window_index < AirSimSettings::kSubwindowCount; ++window_index) {
-        APIPCamera* camera = subwindow_cameras_[window_index];
+        APIPCamera* camera = subwindow_cameras_[window_index]; // 读取一个摄像头
         ImageType camera_type = getSubWindowSettings().at(window_index).image_type;
 
         bool is_visible = getSubWindowSettings().at(window_index).visible && camera != nullptr;
@@ -107,7 +107,7 @@ void ASimHUD::updateWidgetSubwindowVisibility()
             //sub-window captures don't count as a request, set bCaptureEveryFrame and bCaptureOnMovement to display so we can show correctly the subwindow
             camera->setCameraTypeUpdate(camera_type, false);
         }
-
+        // 更新视频窗口图像数据
         widget_->setSubwindowVisibility(window_index,
                                         is_visible,
                                         is_visible ? camera->getRenderTarget(camera_type, false) : nullptr);
@@ -174,10 +174,10 @@ void ASimHUD::createMainWidget()
     widget_->AddToViewport();
 
     //synchronize PIP views
-    widget_->initializeForPlay();
+    widget_->initializeForPlay(); // 蓝图中实现的功能是：创建动态材质
     if (simmode_)
         widget_->setReportVisible(simmode_->EnableReport);
-    widget_->setOnToggleRecordingHandler(std::bind(&ASimHUD::toggleRecordHandler, this));
+    widget_->setOnToggleRecordingHandler(std::bind(&ASimHUD::toggleRecordHandler, this)); // 设置切换录制功能的回调函数
     widget_->setRecordButtonVisibility(AirSimSettings::singleton().is_record_ui_visible);
     updateWidgetSubwindowVisibility();
 }
@@ -331,6 +331,7 @@ FString ASimHUD::getLaunchPath(const std::string& filename)
 
 bool ASimHUD::getSettingsText(std::string& settingsText)
 {
+    // 从命令行/exe文件附近/launch文件附近/用户目录 处读取settings.json文件
     return (getSettingsTextFromCommandLine(settingsText) ||
             readSettingsTextFromFile(FString(msr::airlib::Settings::getExecutableFullPath("settings.json").c_str()), settingsText) ||
             readSettingsTextFromFile(getLaunchPath("settings.json"), settingsText) ||

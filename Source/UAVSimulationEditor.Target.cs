@@ -9,6 +9,6 @@ public class UAVSimulationEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.AddRange( new string[] { "UAVSimulation" } );
-	}
+		ExtraModuleNames.AddRange( new string[] { "UAVSimulation" });
+    }
 }

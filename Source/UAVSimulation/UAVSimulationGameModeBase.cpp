@@ -3,3 +3,10 @@
 
 #include "UAVSimulationGameModeBase.h"
 
+
+
+AUAVSimulationGameModeBase::AUAVSimulationGameModeBase()
+{
+    
+}
+

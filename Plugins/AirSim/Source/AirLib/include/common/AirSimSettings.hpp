@@ -811,7 +811,7 @@ namespace airlib
             auto vehicle_type = Utils::toLower(settings_json.getString("VehicleType", ""));
 
             std::unique_ptr<VehicleSetting> vehicle_setting;
-            if (vehicle_type == kVehicleTypePX4 || vehicle_type == kVehicleTypeArduCopterSolo || vehicle_type == kVehicleTypeArduCopter || vehicle_type == kVehicleTypeArduRover)
+            if (vehicle_type == kVehicleTypePX4 || vehicle_type == kVehicleTypeArduCopterSolo || vehicle_type == kVehicleTypeArduCopter || vehicle_type == kVehicleTypeArduRover )
                 vehicle_setting = createMavLinkVehicleSetting(settings_json);
             //for everything else we don't need derived class yet
             else {
@@ -820,6 +820,7 @@ namespace airlib
                     //TODO: we should be selecting remote if available else keyboard
                     //currently keyboard is not supported so use rc as default
                     vehicle_setting->rc.remote_control_id = 0;
+
                 }
             }
             vehicle_setting->vehicle_name = vehicle_name;

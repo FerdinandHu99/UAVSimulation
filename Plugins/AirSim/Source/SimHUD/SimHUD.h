@@ -9,7 +9,7 @@
 #include <memory>
 #include "SimHUD.generated.h"
 
-UENUM(BlueprintType)
+UENUM(BlueprintType) // 这个宏用于将枚举类型标记为蓝图可用的，这意味着你可以在蓝图中使用该枚举类型
 enum class ESimulatorMode : uint8
 {
     SIM_MODE_HIL UMETA(DisplayName = "Hardware-in-loop")
@@ -21,8 +21,8 @@ class AIRSIM_API ASimHUD : public AHUD
     GENERATED_BODY()
 
 public:
-    typedef msr::airlib::ImageCaptureBase::ImageType ImageType;
-    typedef msr::airlib::AirSimSettings AirSimSettings;
+    using ImageType = msr::airlib::ImageCaptureBase::ImageType;
+    using AirSimSettings = msr::airlib::AirSimSettings;
 
 public:
     void inputEventToggleRecording();
@@ -65,10 +65,10 @@ private:
 
 private:
     typedef common_utils::Utils Utils;
-    UClass* widget_class_;
+    UClass* widget_class_; // 寻找BP_SimHUDWidget类
 
     UPROPERTY()
-    USimHUDWidget* widget_;
+    USimHUDWidget* widget_; // 创建BP_SimHUDWidget类
     UPROPERTY()
     ASimModeBase* simmode_;
 

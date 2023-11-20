@@ -1,4 +1,6 @@
-#include "AirSimGameMode.h"
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#include "MenuGameMode.h"
 #include "Misc/FileHelper.h"
 #include "IImageWrapperModule.h"
 #include "SimHUD/SimHUD.h"
@@ -14,8 +16,8 @@ public:
         static const std::string delim = ":\t";
         if ((tab_pos = message.find(delim)) != std::string::npos) {
             UAirBlueprintLib::LogMessageString(message.substr(0, tab_pos),
-                                               message.substr(tab_pos + delim.size(), std::string::npos),
-                                               LogDebugLevel::Informational);
+                message.substr(tab_pos + delim.size(), std::string::npos),
+                LogDebugLevel::Informational);
 
             return; //display only
         }
@@ -42,7 +44,7 @@ public:
 
 static AUnrealLog GlobalASimLog; // 日志记录器使用单例模式
 
-AAirSimGameMode::AAirSimGameMode(const FObjectInitializer& ObjectInitializer)
+AMenuGameMode::AMenuGameMode(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
 {
     DefaultPawnClass = nullptr;
@@ -63,7 +65,7 @@ AAirSimGameMode::AAirSimGameMode(const FObjectInitializer& ObjectInitializer)
 //    return nullptr;
 //}
 
-void AAirSimGameMode::StartPlay()
+void AMenuGameMode::StartPlay()
 {
     Super::StartPlay();
 

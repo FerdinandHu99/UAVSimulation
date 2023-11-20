@@ -43,7 +43,7 @@ namespace airlib_rpclib
         struct Vector2r
         {
             msr::airlib::real_T x_val = 0, y_val = 0;
-            MSGPACK_DEFINE_MAP(x_val, y_val);
+            MSGPACK_DEFINE_MAP(x_val, y_val); // 以键值对方式序列化
 
             Vector2r()
             {

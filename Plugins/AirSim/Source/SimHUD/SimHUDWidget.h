@@ -31,7 +31,7 @@ public:
     //below are implemented in Blueprint. The return value is forced to be
     //bool even when not needed because of Unreal quirk that if return value
     //is not there then below are treated as events instead of overridable functions
-    UFUNCTION(BlueprintImplementableEvent, Category = "C++ Interface")
+    UFUNCTION(BlueprintImplementableEvent, Category = "C++ Interface") // 相当于虚函数：C++定义接口，蓝图中去实现接口
     bool setSubwindowVisibility(int window_index, bool is_visible, UTextureRenderTarget2D* render_target);
     UFUNCTION(BlueprintImplementableEvent, Category = "C++ Interface")
     int getSubwindowVisibility(int window_index);

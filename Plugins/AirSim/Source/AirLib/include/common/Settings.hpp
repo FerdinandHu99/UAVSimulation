@@ -38,7 +38,7 @@ namespace airlib
         }
 
     public:
-        static Settings& singleton()
+        static Settings& singleton() // 单例模式
         {
             static Settings instance;
             return instance;

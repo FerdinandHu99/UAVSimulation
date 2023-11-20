@@ -72,3 +72,9 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+Content/MenuSystemPro/
+
+Content/minimalist_gui/
+
+Content/Quadcopters/

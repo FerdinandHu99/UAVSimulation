@@ -39,7 +39,7 @@ namespace airlib
         }
 
     protected:
-        struct GroundTruth
+        struct GroundTruth // ≤‚¡ø÷µ
         {
             const Kinematics::State* kinematics;
             const Environment* environment;
