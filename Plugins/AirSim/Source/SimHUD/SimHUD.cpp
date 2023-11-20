@@ -47,6 +47,9 @@ void ASimHUD::Tick(float DeltaSeconds)
 {
     if (simmode_ && simmode_->EnableReport)
         widget_->updateDebugReport(simmode_->getDebugReport());
+    /*if (client.isApiControlEnabled() == true) UAirBlueprintLib::LogMessage(TEXT("Altitude:"),
+        FString::SanitizeFloat(client.getGpsData().gnss.geo_point.altitude),
+        LogDebugLevel::Informational);*/
 }
 
 void ASimHUD::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -147,6 +150,13 @@ void ASimHUD::inputEventToggleAll()
     updateWidgetSubwindowVisibility();
 }
 
+void ASimHUD::commandTakeoff()
+{
+    client.enableApiControl(true);
+    client.armDisarm(true);
+    client.takeoffAsync(5);
+}
+
 void ASimHUD::createMainWidget()
 {
     //create main widget
@@ -214,6 +224,8 @@ void ASimHUD::setupInputBindings()
     UAirBlueprintLib::BindActionToKey("InputEventToggleSubwindow1", EKeys::Two, this, &ASimHUD::inputEventToggleSubwindow1);
     UAirBlueprintLib::BindActionToKey("InputEventToggleSubwindow2", EKeys::Three, this, &ASimHUD::inputEventToggleSubwindow2);
     UAirBlueprintLib::BindActionToKey("InputEventToggleAll", EKeys::Zero, this, &ASimHUD::inputEventToggleAll);
+
+    UAirBlueprintLib::BindActionToKey("Take off", EKeys::Up, this, &ASimHUD::commandTakeoff);
 }
 
 void ASimHUD::initializeSettings()

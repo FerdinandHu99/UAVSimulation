@@ -6,6 +6,7 @@
 #include "SimMode/SimModeBase.h"
 #include "PIPCamera.h"
 #include "api/ApiServerBase.hpp"
+#include "vehicles/multirotor/api/MultirotorRpcLibClient.hpp"
 #include <memory>
 #include "SimHUD.generated.h"
 
@@ -23,6 +24,7 @@ class AIRSIM_API ASimHUD : public AHUD
 public:
     using ImageType = msr::airlib::ImageCaptureBase::ImageType;
     using AirSimSettings = msr::airlib::AirSimSettings;
+    using MultirotorRpcLibClient = msr::airlib::MultirotorRpcLibClient;
 
 public:
     void inputEventToggleRecording();
@@ -33,6 +35,7 @@ public:
     void inputEventToggleSubwindow1();
     void inputEventToggleSubwindow2();
     void inputEventToggleAll();
+    void commandTakeoff();
 
     ASimHUD();
     virtual void BeginPlay() override;
@@ -74,4 +77,5 @@ private:
 
     APIPCamera* subwindow_cameras_[AirSimSettings::kSubwindowCount];
     bool map_changed_;
+    MultirotorRpcLibClient client;
 };
